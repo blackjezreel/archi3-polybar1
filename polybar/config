@@ -1,0 +1,617 @@
+;;;;;;;;      --- ttf-font-awesome                        ;;;;;;;;
+;;;;;;;;      --- ttf-material-icons                      ;;;;;;;;
+;;;;;;;;      --- nerd-fonts-complete                     ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;  Fonts you may want if changing the font         ;;;;;;;;
+;;;;;;             Colours
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[colors]
+background 	= ${xrdb:color0}
+foreground 	= ${xrdb:color14}
+urgent     	= ${xrdb:color1}
+white 		  = ${xrdb:color2}
+cyan 		    = ${xrdb:color3}
+blue 		    = ${xrdb:color4}
+red 		    = ${xrdb:color5}
+purple 		  = ${xrdb:color6}
+green 		  = ${xrdb:color7}
+orange 		  = ${xrdb:color8}
+pink 		    = ${xrdb:color9}
+
+;[colors]
+;background 	= ${xrdb:color0}
+;foreground 	= ${xrdb:color2}
+;urgent     	= ${xrdb:color11}
+;white 		= ${xrdb:color15}
+;cyan 		= ${xrdb:color6}
+;blue 		= ${xrdb:color4}
+;red 		= ${xrdb:color1}
+;purple		= ${xrdb:color5}
+;green 		= ${xrdb:color10}
+;orange		= ${xrdb:color3}
+;pink 		= ${xrdb:color9}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;            Bars
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[settings]
+background = ${colors.background}
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+compositing-background = true
+compositing-foreground = true
+compositing-overline = true
+compositing-underline = true
+compositing-border = true
+screenchange-reload = true
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;; TOP BAR ;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/bar1]
+; Use  xrandr -q | grep " connected" | cut -d ' ' -f1
+; for a list of connected monitors
+monitor =
+monitor-strict = false
+override-redirect = false
+width = 100%
+height = 18
+;fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-size = 13 			;panjang bar
+border-bottom-size = 2			;besar garis bawah
+border-top-size = 3			;jarak bar dari atas
+border-bottom-color = ${colors.foreground}
+;border-top-color = ${colors.foreground}
+offset-x = 0
+offset-y = 0
+radius-top = 27
+radius-bottom = 0
+padding = 0
+
+;;; Font ;;;
+font-0 = raleway:bold:size=9;2
+font-1 = FontAwesome:pixelsize=10;2
+font-2 = MaterialIcons:size=9;2
+font-3 = Fira Sans:size=9:weight=regular;2
+
+;;; Modules ;;;
+modules-left = i3
+modules-center = xwindow
+modules-right = date
+
+
+module-margin = 4
+padding-right = 10
+padding-left = 10
+bottom = false
+underline-size = 2
+undeline-color= #FFFFFF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;; SYSTEM TRAY ;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;tray-position = center
+;tray-padding = 10
+;tray-foreground = ${colors.foreground}
+;tray-background = ${colors.background}
+;tray-offset-x = 520
+;tray-offset-y = 0
+;tray-transparent = false
+
+;click-right = pavucontrol &
+
+;click-middle = skippy-xd --activate-window-picker
+;scroll-up = $HOME/.config/polybar/scripts/pavolume.sh --up
+double-click-middle = skippy-xd --activate-window-picker
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;; BOTTOM BAR ;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[bar/bar2]
+monitor =
+monitor-strict = false
+override-redirect = false
+width = 100%
+height = 18
+;offset-x = 20
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-size = 13
+border-bottom-size = 3
+border-top-size = 2
+border-top-color = ${colors.foreground}
+radius-top = 0
+radius-bottom = 27
+
+;;; Font ;;;
+font-0 = raleway:bold:size=9;2
+font-1 = FontAwesome:pixelsize=9;2
+font-2 = MaterialIcons:size=9;2
+font-3 = Fira Sans:size=9:weight=regular;2
+
+;;; Modules ;;;
+modules-left = rofi xfce gmrun
+modules-center =  dbox dropbox filesystem temp memory cpu  eth volume  battery
+modules-right = userlogo user kernel menu
+
+
+module-margin = 2
+padding-right = 10
+padding-left = 10
+bottom = true
+underline-size = 2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;      Modules      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = true
+;format-spacing = 4
+
+strip-wsnumbers = true
+pin-workspaces = true
+label-mode-padding = 5
+label-mode-foreground = ${colors.foreground}
+
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding = 5
+label-visible-foregroud = ${colors.foreground}
+label-visible-padding = 5
+
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 5
+
+label-urgent-padding = 5
+
+label-dimmed-underline = ${colors.background}
+label-focused-underline = ${colors.green}
+
+
+[module/pkg]
+type = custom/script
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+exec = $HOME/.config/polybar/scripts/pkg.sh
+exec-if = "ping -c 1 8.8.8.8 > /dev/null"
+click-left = termite --geometry=750x550 --exec=pacli &
+click-right = termite --geometry=750x550 --exec=pacli &
+label-padding = 0
+interval = 1500
+tail = true
+
+
+[module/network]
+type = custom/script
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+exec = $HOME/.config/polybar/scripts/network.sh
+click-left = python /usr/bin/networkmanager_dmenu
+;click-right = python /usr/bin/networkmanager_dmenu
+label-padding-left = 5
+label-padding-right = 5
+interval = 1
+tail = true
+
+
+[module/window_count]
+type = custom/script
+interval = 2
+label = "%{A1:skippy-xd --activate-window-picker:}   %output%  %{A}"
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+exec = echo "$(($(wmctrl -l -i | wc -l)-1))"
+format = <label>
+format-prefix = "   "
+format-prefix-foreground = ${colors.foreground}
+format-prefix-background = ${colors.background}
+format-padding = 0
+;label-padding-left = 5
+;label-padding-right = 5
+
+
+[module/clock]
+type = internal/date
+format = <label>
+label-padding-right = 0
+label-padding-left = 0
+
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+interval = 2
+time = %R
+label = " %{A1:gsimplecal & disown:} %{A3:gsimplecal & disown:} %time% %{A}%{A}"
+;
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+;label-volume-padding-right = 5
+;label-volume-padding-left = 5
+format-volume =  "<ramp-volume> <label-volume>"
+label-muted = "     muted  "
+ramp-volume-0 = "   "
+label-muted-foreground = ${colors.foreground}
+label-volume-foreground = ${colors.foreground}
+label-ramp-volume-0-foreground = ${colors.blue}
+format-volume-background = ${colors.background}
+label-ramp-volume-0-padding-left = 0
+
+[module/apps]
+type = custom/menu
+format-spacing = 1
+format-background = ${colors.background}
+label-open = "  "
+label-open-foreground = ${colors.foreground}
+label-open-background = ${colors.background}
+label-close = "    "
+label-close-foreground = ${colors.urgent}
+label-separator = " | "
+label-separator-foreground = ${colors.foreground}
+#Top Level
+
+
+
+[module/menu]
+type = custom/menu
+format-spacing = 1
+format-background = ${colors.background}
+label-open = "   "
+label-open-foreground = ${colors.foreground}
+label-open-background = ${colors.background}
+label-close = "    "
+label-close-foreground = ${colors.urgent}
+label-separator = " | "
+label-separator-foreground = ${colors.foreground}
+# Top level
+#menu-0-0 = " apps  "
+#menu-0-0-exec = menu-open-1
+#menu-0-0 = "    |"
+#menu-0-0-exec = menu-open-2
+# 1
+menu-1-0 = "   "
+menu-1-0-exec = firefox
+menu-1-1 = "  "
+menu-1-1-exec = termite
+menu-1-2 = "   "
+menu-1-2-exec =  thunar
+# 2
+#menu-0-0 = "  "
+#menu-0-0-exec = menu-open-0
+menu-0-0 = "   "
+menu-0-0-exec = slimlock
+menu-0-1 = "   "
+menu-0-1-exec = i3-nagbar -t warning -m
+menu-0-2 = "   "
+menu-0-2-exec = systemctl reboot
+menu-0-3 = "      |"
+menu-0-3-exec = systemctl poweroff
+
+
+; Extra modules
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+battery = BAT1
+adapter = ACAD
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
+label-full-padding-left= 10
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.foreground}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.foreground}
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = ${colors.foreground}
+bar-capacity-fill-font = 5
+bar-capacity-empty = █
+bar-capacity-empty-font = 5
+bar-capacity-empty-foreground = ${colors.foreground}
+;label-charging-padding-left = 5
+;label-discharging-padding-left = 5
+;label-full-padding-left = 5
+
+
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/powermenu1]
+type = custom/menu
+
+format-padding = 0
+
+label-open = 
+label-close = 
+label-separator = |
+
+menu-0-0 = Terminate WM
+menu-0-0-foreground = ${colors.foreground}
+menu-0-0-exec = bspc quit -1
+menu-0-1 = 
+menu-0-1-foreground = ${colors.foreground}
+menu-0-1-exec = menu_open-1
+menu-0-2 = 
+menu-0-2-foreground = ${colors.foreground}
+menu-0-2-exec = menu_open-2
+
+menu-1-0 = Cancel
+menu-1-0-foreground = ${colors.foreground}
+menu-1-0-exec = menu_open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = ${colors.foreground}
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = ${colors.foreground}
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = ${colors.foreground}
+menu-2-1-exec = menu_open-0
+
+
+[module/trash]
+interval = 3
+type = custom/script
+exec = $HOME/.config/polybar/scripts/trash
+format-prefix = "    "
+format-prefix-foreground = ${colors.white}
+format-prefix-background = ${colors.background}
+format-background = ${colors.background}
+;click-right = rm -rf $HOME/.local/share/Trash/files/*
+click-left = exo-open --launch FileManager $HOME/.local/share/Trash/files
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+mount-1 = /run/media/hans/DATA
+;label-mounted-padding-right = 5
+;label-mounted-padding-left = 5
+label-mounted =  %percentage_used%%
+label-mounted-foreground = ${colors.foreground}
+label-mounted-background = ${colors.background}
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground}
+label-unmounted-background = ${colors.background}
+
+[module/compton]
+type = custom/script
+label-background = ${colors.b-alt}
+exec = $HOME/.config/polybar/scripts/compton.sh
+click-left = $HOME/.config/polybar/scripts/compton-toggle.sh
+click-right = $HOME/.config/polybar/scripts/compton-toggle.sh
+interval = 2
+label-padding-left = 5
+label-padding-right = 5
+
+
+[module/rofi]
+type = custom/script
+exec = echo "       "
+click-left = rofi -show drun -lines 20 -font "raleway bold 11"
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+
+
+[module/temp]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+warn-temp = 70
+format = <label>
+format-padding = 0
+label-foreground = ${colors.foreground}
+label-warn-foreground = ${colors.red}
+label = "    %temperature%  "
+label-warn = "    %temperature%  "
+label-background = ${colors.background}
+label-padding-left = 0
+label-padding-right = 0
+
+[module/memory]
+type = internal/memory
+interval = 1
+;label-padding-right = 2
+label-padding-left = 2
+label = " %{A1:termite --geometry=750x550 --exec=htop & disown:}%percentage_used%%%{A}"
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+;label-padding-right = 2
+label-padding-left = 2
+label-foreground = ${colors.foreground}
+format-prefix-background = ${colors.transparent}
+label= " %{A1:termite --geometry=750x550 --exec=htop & disown:}%percentage%%%{A}"
+label-background = ${colors.background}
+
+[module/xwindow]
+type = internal/xwindow
+label-maxlen = 200
+label-padding-left = 5
+label-padding-right = 5
+label-background = ${colors.background}
+label-foreground = ${colors.foreground}
+format-underline = ${colors.green}
+
+[module/eth]
+type = internal/network
+interface = wlp3s0
+interval = 0.5
+;label-foreground = ${colors.orange}
+
+;format-connected-underline = ${colors.foreground}
+label-connected =  %essid%  %downspeed%
+;label-connected =  %essid%   : %upspeed% |  : %downspeed%
+label-connected-foreground = ${colors.foreground}
+
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = NET %ifname% disconnected
+label-disconnected-foreground = ${colors.red}
+
+;Required if <bar-progress> is used
+bar-progress-width = 5
+bar-progress-format = %{+u}%{+o}%fill%%{-u}%{-o}%indicator%%{+u}%{+o}%empty%%{-u}%{-o}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = ${colors.v}
+bar-progress-indicator-font = 3
+bar-progress-fill = █
+bar-progress-fill-foreground = #5a5
+bar-progress-fill-font = 3
+bar-progress-empty = █
+bar-progress-empty-foreground = #555
+bar-progress-empty-font = 3
+label-padding-left = 5
+label-padding-right = 5
+
+
+;;;; module applications
+[module/terminal]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = termite
+
+[module/thunar]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = thunar
+
+[module/firefox]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = firefox
+
+[module/mousepad]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = mousepad
+
+[module/spotify]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = spotify
+
+
+[module/gradio]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = gradio
+
+[module/popcorn]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = popcorntime
+
+[module/dropbox]
+type = custom/script
+;label = ""
+exec = dropbox-cli status
+;format-underline = ${colors.cyan}
+interval = 1
+
+[module/dbox]
+type=custom/script
+format-background = ${colors.background}
+exec = echo "  "
+label-padding-left = 1
+label-padding-right = 2
+
+[module/kernel]
+type = custom/script
+exec = uname -sr
+label-padding-left = 1
+label-padding-right = 2
+
+[module/gmrun]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "   "
+click-left = gmrun
+
+[module/user]
+type=custom/script
+format-background = ${colors.background}
+exec = users
+
+[module/userlogo]
+type=custom/script
+format-background = ${colors.background}
+exec = echo "  "
+label-padding-left = 1
+label-padding-right = 2
+
+[module/xfce]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo "  "
+click-left = xfce4-appfinder
+
+[module/hotspot]
+type=custom/script
+format-spacing = 1
+format-background = ${colors.background}
+exec = echo " wifi "
+click-left = termite "sudo create_ap wlp3s0 wlp3s0 arch hagimaru"
+
+[module/date]
+type=custom/script
+format-background = ${colors.background}
+exec = date
+interval = 1
