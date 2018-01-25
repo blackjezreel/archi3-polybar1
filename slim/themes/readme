@@ -1,4 +1,4 @@
-install 
+install slimlock
 copy all themes to /usr/share/slim/themes
 
 copy slim.conf to /etc
