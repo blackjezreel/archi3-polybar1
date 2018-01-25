@@ -1,0 +1,679 @@
+# hans i3 configuration
+# set windows button as mod
+set $mod Mod4
+
+# Font
+font pango:hermit 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+########################################################################################
+###############################    MENU   ##############################################
+########################################################################################
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id /home/hans/.config/i3/scripts/dmen.sh
+
+# Start Menu Rofi
+bindsym $mod+shift+d exec  --no-startup-id rofi -show drun -lines 20 -font "raleway bold 11"
+#bindsym $mod+d exec --no-startup-id dmenu_run -nb "$color0" -nf "$color15" -sb "$color1" -sf "$color15"
+
+# Start Menu Xfce4-appfinder
+bindsym $mod+control+a exec --no-startup-id xfce4-appfinder
+
+# Start Menu gmrun
+bindsym $mod+control+d exec --no-startup-id gmrun
+
+# Change Rofi theme
+bindsym control+mod1+r exec --no-startup-id rofi-theme-selector
+
+
+# Change Focus :
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move Focused Window :
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+F11 fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $modmod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# next/previous workspace
+
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+#navigate workspaces next / previous
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+workspace 1 output $firstMonitor
+workspace 2 output $firstMonitor
+workspace 3 output $firstMonitor
+workspace 4 output $firstMonitor
+workspace 5 output $firstMonitor
+workspace 6 output $secondMonitor
+workspace 7 output $secondMonitor
+workspace 8 output $secondMonitor
+workspace 9 output $secondMonitor
+workspace 10 output $secondMonitor
+
+# Workspace Definition
+
+#set $ws1 "1"
+#set $ws2 "2"
+#set $ws3 "3"
+#set $ws4 "4"
+#set $ws5 "5"
+#set $ws6 "6"
+#set $ws7 "7"
+#set $ws8 "8"
+#set $ws9 "9"
+#set $ws10 "10"
+
+#set $ws1 "one"
+#set $ws2 "two"
+#set $ws3 "three"
+#set $ws4 "four"
+#set $ws5 "five"
+#set $ws6 "six"
+#set $ws7 "seven"
+#set $ws8 "eight"
+#set $ws9 "nine"
+#set $ws10 "ten"
+
+#set $ws1 "terminal"
+#set $ws2 "folder"
+#set $ws3 "internet"
+#set $ws4 "music"
+#set $ws5 "pictures"
+#set $ws6 "documents"
+#set $ws7 "videos"
+#set $ws8 "games"
+#set $ws9 "virtual"
+#set $ws10 "others"
+
+#set $ws1 " Terminal"
+#set $ws2 " Folders"
+#set $ws3 " Browser"
+#set $ws4 " Music"
+#set $ws5 " Pictures"
+#set $ws6 " Documents"
+#set $ws7 " Videos"
+#set $ws8 " Games"
+#set $ws9 " Socmed"
+#set $ws10 " Virtual"
+
+set $ws1 "  "
+set $ws2 " "
+set $ws3 ""
+set $ws4 " "
+set $ws5 " "
+set $ws6 ""
+set $ws7 ""
+set $ws8 ""
+set $ws9 ""
+set $ws10 ""
+
+# Switch to workspace
+bindsym $mod+1	workspace $ws1
+bindsym $mod+2	workspace $ws2
+bindsym $mod+3	workspace $ws3
+bindsym $mod+4	workspace $ws4
+bindsym $mod+5	workspace $ws5
+bindsym $mod+6	workspace $ws6
+bindsym $mod+7	workspace $ws7
+bindsym $mod+8	workspace $ws8
+bindsym $mod+9	workspace $ws9
+bindsym $mod+0	workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# LOGOUT LOCK REBOOT SHUTDOWN
+#Press $mod (super) and X to exit - check toolbar for next choices
+bindsym $mod+X mode "$mode_system"
+
+set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym k exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh logout, mode "default"
+    bindsym u exec --no-startup-id ~/.config/i3/scripts/i3exit.sh suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/scripts/i3exit.sh hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/scripts/i3exit.sh reboot, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+####
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+#bindsym $mod+Shift+w exec "wal -i $HOME/Pictures/Favorites -o wal-set"; restart
+bindsym $mod+Shift+r restart; . /home/hans/.zshrc
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+##########################################################################
+###########################  Bar Appearance  ########################
+##########################################################################
+
+
+
+#bar {
+#set_from_resources $fg color7
+#set_from_resources $bg color2
+#    height 19
+#    workspace_buttons yes
+    #font pango:hermit 7.5
+#    font pango: raleway bold 8
+
+#    position top
+#   position bottom
+    #separator_symbol 
+    #tray_output $firstMonitor
+    #tray_output $secondMonitor
+
+# Option 1 : i3Status
+# status_command i3status -c ~/.config/i3/i3status.conf
+
+
+# Option 2 : i3blocks
+#status_command i3blocks -c ~/.config/i3/i3blocks.conf
+
+
+## Light Color - Mexico4
+# colors {
+#    separator  #0f2841
+#    background #dbe5f1
+#    statusline #0f2841
+
+                       #border   #isi      #text
+#    focused_workspace  #0f2841   #0f2841   #dbe5f1
+#    active_workspace   #0f2841   #0f2841   #0f2841
+#    inactive_workspace #0f2841   #dbe5f1   #027B17
+#    urgent_workspace   #CD0004   #CD0004   #dbe5f1
+
+## Dark Colors
+#  colors {
+#    separator $bg
+#    background $bg
+#    statusline $fg
+
+    # List of black color :
+    # #282828 #444444 #111111 #252525
+
+#    focused_workspace  #252525 #DBDBDB #252525
+#    active_workspace   #DBDBDB #DBDBDB #DBDBDB
+#    inactive_workspace #DBDBDB #252525 #DBDBDB
+#    urgent_workspace   #d33682 #d33682 #fdf6e3
+
+#    focused_workspace  #$fg   #$fg   #$bg
+#    active_workspace   #$fg   #$fg   #$fg
+#    inactive_workspace #$fg   #$bg   #027B17
+#    urgent_workspace   #CD0004   #CD0004   #$bg
+
+# class                 border  backgr. text indicator child_border
+#client.focused          $bg     $bg     $fg  $bg       $bg
+#client.focused_inactive $bg     $bg     $fg  $bg       $bg
+#client.unfocused        $bg     $bg     $fg  $bg       $bg
+#client.urgent           $bg     $bg     $fg  $bg       $bg
+#client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+#client.background       $bg
+
+#  }
+#}
+## Option 3 : Polybar
+exec_always --no-startup-id /home/hans/.config/polybar/launch-i3-polybar.sh
+
+
+#####################################################################################################################
+#################                          i3 gaps change                                           #################
+#####################################################################################################################
+
+# Settings for I3 next gap git
+# https://github.com/Airblader/i3/tree/gaps-next
+
+for_window [class="^.*"] border pixel 3
+gaps inner 14
+gaps outer 0
+#smart_gaps on
+#smart_borders on
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p gaps inner current plus 5
+bindsym $mod+Shift+p gaps inner current minus 5
+
+
+#################################################################################
+############################   Screenshots  #####################################
+#################################################################################
+
+bindsym Print exec --no-startup-id scrot 'Screenshot_%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots'
+bindsym Control+Print exec --no-startup-id xfce4-screenshooter
+
+
+
+#####################################################################################################################
+#################                          assign applications to workspaces                       #################
+#####################################################################################################################
+
+# Assign application to start on a specific workspace
+# you can find the class with the program xprop
+
+#Workspace 2 File Manager adn Editor related
+assign [class="Thunar"] $ws2
+assign [class="atom|Atom|Mousepad|sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"] $ws2
+
+# Workspace 3 Internet Browser
+assign [class="Firefox|Navigator|Vivaldi-stable|Vivaldi-snapshot|Opera"] $ws3
+
+# Workspace 4 Music
+assign [class="Rhythmbox|Audacious|Deadbeef|Clementine|Spotify|Gradio|spotify"] $ws4
+
+#fix for spotify not moving to workspace 4
+for_window [class="Spotify"] move to $ws4
+
+# Workspace 5 Pictures and Images Editor
+assign [class="Inkscape"] $ws5
+assign [class="Gimp"] $ws5
+assign [class="gwenview|shotwell|Shotwell|Xviewer"] $ws5
+assign [class="Nitrogen|feh|gthumb|Gthumb|eog|Eog|Pinta|pixeluvo|Pixeluvo"] $ws5
+assign [class="Meld|gpick|Gpick"] $ws5
+
+# Workspace 6 Office related
+assign [class="libreoffice"] $ws6
+
+# Workspace 7 Video Player
+assign [class="Vlc|vlc|Parole"] $ws7
+assign [class="crx_hecfofbbdfadifpemejbbdcjmfmboohj"] $ws7
+# Workspace 8 Games
+
+# Workspace 9 Messenger  and email clients
+assign [class=Geary|Evolution|telegram-desktop|TelegramDesktop] $ws9
+
+# Workspace 10 Virtual machine related
+assign [class="Vmplayer|VirtualBox"] $ws10
+
+######################################################################################
+#################### USER APPLICATIONS TO START AT BOOT ##############################
+######################################################################################
+
+# Set polybar as panel
+# exec_always --no-startup-id /home/hans/.config/polybar/launch-i3-polybar.sh
+
+# Nitrogen - Wallpaper
+#exec_always --no-startup-id nitrogen --restore
+
+# TRAY APPLICATIONS
+
+# Authentication dialog
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Telegram
+# exec_always --no-startup-id telegram-desktop
+
+#
+
+#variety
+#exec --no-startup-id variety
+
+# Updater
+exec_always --no-startup-id pamac-tray
+exec --no-startup-id pamac-tray-appindicator
+
+# Wifi
+exec --no-startup-id nm-applet
+
+# NumLock
+exec_always --no-startup-id numlockx on
+
+# Dropbox
+exec_always --no-startup-id dropbox start
+
+# volume
+#exec --no-startup-id pasystray
+exec --no-startup-id pulseaudio
+
+# clipit
+exec_always --no-startup-id clipit
+
+# redshift
+exec --no-startup-id redshift
+exec --no-startup-id redshift
+
+# wal (set color from wallpaper
+exec_always --no-startup-id wal -i $(< ~/.cache/wal/wal) -t -q
+
+# wallpaper ironman
+#exec  --no-startup-id wal -i ~/Pictures/ironman.png -q
+
+#####################################################################################################################
+#################                          applications keyboard shortcuts                          #################
+#####################################################################################################################
+
+#not workspace related
+
+# Terminal (termite)
+bindsym $mod+Return exec termite
+
+#slimlock
+bindsym $mod+shift+l exec --no-startup-id slimlock
+
+#System monitor
+bindsym control+Shift+Escape exec --no-startup-id htop;focus
+
+#settings
+bindsym control+mod1+m exec --no-startup-id xfce4-settings-manager
+
+#workspace related
+
+# W2 > thunar, mousepad
+#for_window [class="thunar"] focus
+bindsym $mod+t exec --no-startup-id thunar; workspace $ws2
+bindsym $mod+F2 exec --no-startup-id mousepad; workspace $ws2
+
+
+# W3 > Web Browser : firefox, google chrome
+bindsym $mod+f exec --no-startup-id firefox; workspace $ws3
+bindsym $mod+shift+f exec --no-startup-id google-chrome-stable; workspace $ws3
+
+# W4 > Gradio, rhythmbox, spotify
+bindsym $mod+mod1+m exec --no-startup-id spotify; workspace $ws4
+bindsym $mod+shift+m exec --no-startup-id rhythmbox; workspace $ws4
+bindsym $mod+Control+m exec --no-startup-id gradio; workspace $ws4
+
+# W5 > gimp, inkscape, gpick, nitrogen
+bindsym $mod+mod1+n exec --no-startup-id nitrogen; workspace $ws5
+bindsym $mod+g exec --no-startup-id gimp; workspace $ws5
+bindsym $mod+mod1+g exec --no-startup-id gpick; workspace $ws5
+bindsym $mod+i exec --no-startup-id inkscape; workspace $ws5
+
+# W6 > office
+bindsym $mod+shift+F10 exec --no-startup-id lowriter; workspace $ws6
+bindsym $mod+shift+F11 exec --no-startup-id localc; workspace $ws6
+bindsym $mod+shift+F12 exec --no-startup-id loimpress; workspace $ws6
+
+# W7 > vlc
+bindsym $mod+Shift+v exec --no-startup-id vlc; workspace $ws7
+
+#workspace 8 related
+
+#workspace 9 related
+#bindsym $mod+F9 exec --no-startup-id evolution;workspace 9;focus
+#bindsym control+mod1+e exec --no-startup-id evolution;workspace 9;focus
+#bindsym $mod+F9 exec --no-startup-id geary;workspace 9;focus
+#bindsym control+mod1+e exec --no-startup-id geary;workspace 9;focus
+
+#workspace 10 related
+bindsym $mod+F7 exec --no-startup-id virtualbox
+
+
+#####################################################################################################################
+#################                          floating or tiled                                        #################
+#####################################################################################################################
+
+
+#floating enabled from some programs - find with xprop
+
+for_window [class="Bleachbit"] floating disable
+for_window [class="Blueberry.py"] floating enable
+for_window [class="Brasero"] floating disable
+for_window [class="Galculator"] floating enable
+for_window [class="Gnome-disks"] floating disable
+for_window [class="^Gnome-font-viewer$"] floating enable
+for_window [class="^Gpick$"] floating enable
+for_window [class="Hexchat"] floating disable
+for_window [class="Imagewriter"] floating enable
+for_window [class="Font-manager"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Pavucontrol"] floating disable
+for_window [class="^Skype$"] floating enable
+for_window [class="^Spotify$"] floating disable
+for_window [class="System-config-printer.py"] floating enable
+for_window [class="Unetbootin.elf"] floating enable
+for_window [class="Usb-creator-gtk"] floating enable
+for_window [class="^Vlc$"] floating disable
+for_window [class="Wine"] floating disable
+for_window [class="Xfburn"] floating disable
+for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="Xfce4-settings-manager"] floating disable
+for_window [class="Xfce4-taskmanager"] floating enable
+
+
+for_window [instance="gimp"] floating disable
+for_window [instance="script-fu"] border normal
+for_window [instance="variety"] floating enable
+for_window [instance="Gpick"] floating enable
+for_window [instance="gpick"] floating enable
+for_window [instance="Ristretto"] floating enable
+for_window [instance="ristretto"] floating enable
+for_window [instance="lxappearane"] floating enable
+for_window [instance="Lxappearane"] floating enable
+for_window [instance="oomox"] floating enable
+for_window [instance="Oomox"] floating enable
+
+for_window [title="Copying"] floating enable
+for_window [title="Deleting"] floating enable
+for_window [title="Moving"] floating enable
+for_window [title="^Terminator Preferences$"] floating enable
+
+
+for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="^Preferences$"] floating enable
+for_window [window_role="setup"] floating enable
+
+
+
+
+#####################################################################################################################
+#################                          compton of i3wm                                          #################
+#####################################################################################################################
+
+#if you want transparency on non-focused windows, ...
+exec_always --no-startup-id compton -b
+
+
+
+
+
+
+
+#####################################################################################################################
+#################                  MY FAVORITE SETTINGS - HANS
+#################
+#####################################################################################################################
+
+#ashes colyor
+set_from_resources $fg color0
+set_from_resources $bg color2
+set $background $bg
+set $foreground $fg
+set $gray #ffffff
+set $primary #000000
+#set $primary #bdbdbd
+#set $primary #25da57 #green
+set $secondary #ffffff
+##secondary FF913D
+set $tertiary #ffffff
+set $additional #acc267
+set $warning #303030
+
+
+# colors                BORDER      BACKGROUND TEXT        INDICATOR
+client.focused          $primary    $primary   $background $primary
+client.focused_inactive $secondary  $secondary $foreground $secondary
+client.unfocused        $tertiary   $tertiary  $background $tertiary
+client.urgent           $gray       $gray      $foreground $gray
+
+
+
+#####################################################################################################################
+#################                          variety for your wallpapers                              #################
+#####################################################################################################################
+
+
+#Variety keybindings mod1 = ALT
+# trash wallpaper
+bindsym mod1+t exec --no-startup-id variety -t
+
+# next wallpaper
+#bindsym mod1+n exec --no-startup-id variety -n
+#bindsym mod1+Right exec --no-startup-id variety -n
+
+# previous wallpaper
+#bindsym mod1+p exec --no-startup-id variety -p
+#bindsym mod1+Left exec --no-startup-id variety -p
+
+# favorite wallpaper
+#bindsym mod1+f exec --no-startup-id variety -f
+
+# pause wallpaper
+#bindsym mod1+Up exec --no-startup-id variety --pause
+
+# resume wallpaper
+#bindsym mod1+Down exec --no-startup-id variety --resume
+
+# Cycle wallpapers and apply new colorscheme. (wal)
+bindsym $mod+shift+w exec "wal -i $HOME/Pictures/Favorites -o wal-set -q"
+
+
+#####################################################################
+#######################   Popups Control  ###########################
+#####################################################################
+
+# Popups during fullscreen mode
+popup_during_fullscreen smart
+
+
+#####################################################################################################################
+#################                          give focus to applications                               #################
+#####################################################################################################################
+
+
+for_window [class="Xfce4-terminal"] focus
+for_window [class="Termite"] focus
+for_window [class="Terminator"] focus
+
+
+#####################################################################################################################
+#################                          xbacklight                                               #################
+#####################################################################################################################
+
+bindsym $mod+shift+b exec --no-startup-id xbacklight -inc 20 # increase screen brightness
+bindsym $mod+control+b exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
