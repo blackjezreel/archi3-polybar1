@@ -1,0 +1,83 @@
+### oomox-mexico4
+### light theme
+
+[options]
+allow_bold = true
+audible_bell = true
+browser = xdg-open
+clickable_url = true
+cursor_blink = system
+cursor_shape = underline
+dynamic_title = true
+filter_unmatched_urls = true
+geometry = 600x300
+scroll_on_output = false
+scroll_on_keystroke = true
+modify_other_keys = false
+mouse_autohide = false
+urgent_on_bell = true
+font = hermit 9
+scrollback_lines = 10000
+search_wrap = true
+icon_name = terminal
+
+size_hints = false
+
+# Hide links that are no longer valid in url select overlay mode
+
+# emit escape sequences for extra modified keys
+
+[colors]
+cursor = #4d2b2d
+foreground = #111014
+foreground_bold = #111014
+background = rgba(251, 255, 237, 0.85)
+
+# if unset, will reverse foreground and background
+highlight = #2f2f2f
+
+# black
+color0  = #3a3e2c
+color8 = #4a4e3c
+
+# red
+color1  = #dd4d38
+color9  = #f0474a
+
+# green
+color2  =  #255B49
+color10  = #02901B
+
+# yellow
+color3  = #fe8e3b
+color11 = #f5a725
+
+# blue
+color4  = #80a2dd
+color12 = #184ba3
+
+# magenta
+color5  = #184ba3
+color13 = #fa89a1
+
+# cyan
+color6  = #fa89a1
+color14 = #84b7ec
+
+# white
+color7  = #ECB4E2
+color15 = #f2e3e9
+
+
+[hints]
+#font = Monospace 11
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+padding = 2
+#border = #3f3f3f
+border_width = 1
+#roundness = 2.0
+
+# vim: ft=dosini cms=#%s
